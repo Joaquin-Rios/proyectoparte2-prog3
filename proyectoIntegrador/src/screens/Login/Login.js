@@ -13,11 +13,11 @@ class Login extends Component {
         }
     }
 
-    onSubmit(email, password){
+   /* onSubmit(email, password){
         auth.signInWithEmailAndPassword(email, password)
         .then(response => this.setState({loggedIn: true}, ()=>console.log(this.state.loggedIn) ))
         .catch(error => this.setState({error: 'Fallo en las credenciales'}, ()=>console.log(error)))
-    }
+    } */
 
 
     render(){
@@ -35,7 +35,7 @@ class Login extends Component {
                     secureTextEntry={true}
                     onChangeText={ text => this.setState({password:text})} />
                 
-                <TouchableOpacity onPress={() => this.onSubmit()} >
+                <TouchableOpacity onPress={() => this.props.route.params.signIn(this.state.email, this.state.password)} >
                     <Text style={style.boton}>Loguearme</Text>
                 </TouchableOpacity>
 

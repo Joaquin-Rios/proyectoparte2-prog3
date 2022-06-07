@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import {db} from '../../firebase/config'
 
 
-class Profile extends Component {
+class Posts extends Component {
   constructor(props){
     super(props)
     this.state={
@@ -16,7 +16,7 @@ class Profile extends Component {
   render(){
     return (
       <View>
-       <Text>Aqui van los datos del perfil </Text>
+       <Text>Aqui irian los posts</Text>
 
         
       </View>
@@ -24,4 +24,19 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+const styles = StyleSheet.create({
+  btn:{
+    flex:1,
+    borderWidth:1,
+    borderRadius:5,
+    backgroundColor:'#192A51',
+    paddingVertical:16,
+    paddingHorizontal:8,
+    marginHorizontal:'auto',
+  },
+  textBtn:{
+    color:'white'
+  }
+})
+
+export default Posts

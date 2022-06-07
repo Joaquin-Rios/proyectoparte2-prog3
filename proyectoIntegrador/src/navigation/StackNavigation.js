@@ -1,11 +1,10 @@
 import React, {Component} from 'react'
 import { auth, db } from '../firebase/config';
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Login from "../screens/Login";
-import Home from "../screens/Home";
-import Register from "../screens/Register";
+import Login from "../screens/Login/Login";
+import Home from "../screens/Home/Home";
+import Register from "../screens/Register/Register";
 import { StatusBar } from 'expo-status-bar';
 import TabNavigation from './TabNavigation';
 
@@ -83,7 +82,6 @@ class StackNavigation extends Component{
                         <Stack.Group>
                             <Stack.Screen 
                                 name='Register' 
-    
                                 children={
                                     (props)=> <Register 
                                     signUp={(email, password)=> this.signUp(email, password)}
@@ -107,10 +105,9 @@ class StackNavigation extends Component{
                             }}
                             />
                         </Stack.Group>
-                    }
-                        
+                    }      
                 </Stack.Navigator>
-    </NavigationContainer>
+            </NavigationContainer>
 
         )
     }

@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, StyleSheet } from 'react-native'
 import React, {Component} from 'react'
 import {db} from '../../firebase/config'
-import Message from '../../components/Message'
+import Posts from '../../components/Posts/Posts'
 
 class Home extends Component {
   constructor(props){
@@ -25,7 +25,7 @@ class Home extends Component {
          <FlatList
          data={this.state.info}
          keyExtractor={item => item.id.toString()}
-         renderItem={({ item }) => <Message info={item} navigation={this.props.navigation}/>}
+         renderItem={({ item }) => <Posts info={item} navigation={this.props.navigation}/>}
          />
          }
 
