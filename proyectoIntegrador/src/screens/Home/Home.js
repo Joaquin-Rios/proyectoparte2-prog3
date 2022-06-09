@@ -12,11 +12,32 @@ class Home extends Component {
     }
   }
 
+  componentDidMount(){
+    db.collection('posts').onSnapshot(
+      (docs)=>{
+        let posts = []
+        docs.forEach(
+          doc => {
+            posts.push({
+              id:doc.id,
+              data: doc.data()
+            })
+          }
+        )
+        this.setState({
+          info:posts,
+          loading:false
+        })
+
+      }
+    )
+  }
+
 
   render(){
     return (
       <View>
-       <Text>Estos son los Messages recientes:</Text>
+       <Text>Estos son los Posts recientes:</Text>
 
         {
          this.state.loading ?

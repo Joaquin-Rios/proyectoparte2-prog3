@@ -53,6 +53,18 @@ class StackNavigation extends Component{
         })
         .catch(error =>this.setState({errorMessage: error.message}))
     }
+
+    newPosts(post){
+        db.collection('posts').add({
+            owner:auth.currentUser.email,
+            createdAt: Date.now(),
+            post:post,
+            likes:[],
+            //subMessages:[]
+        })
+        .then(response => console.log(response))
+        .catch(error => console.log(error.message))
+    }
     
     
 
@@ -72,7 +84,7 @@ class StackNavigation extends Component{
                             initialParams={
                                 {
                                     logout: () => this.logout(),
-                                    errorMessage: this.message
+                                    errorMessage: this.errorMessage
                                 }
                             }
                             />
