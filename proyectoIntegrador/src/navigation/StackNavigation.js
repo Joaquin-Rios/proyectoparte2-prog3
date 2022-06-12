@@ -7,6 +7,7 @@ import Home from "../screens/Home/Home";
 import Register from "../screens/Register/Register";
 import { StatusBar } from 'expo-status-bar';
 import TabNavigation from './TabNavigation';
+import Profile from '../screens/Profile/Profile';
 
 
 
@@ -58,6 +59,20 @@ class StackNavigation extends Component{
         db.collection('posts').add({
             owner:auth.currentUser.email,
             createdAt: Date.now(),
+            post:post,
+            likes:[],
+            //subMessages:[]
+        })
+        .then(response => console.log(response))
+        .catch(error => console.log(error.message))
+    }
+
+    Users(user){
+        db.collection('users').add({
+            owner:auth.currentUser.email,
+            username:auth.currentUser.username,
+            createdAt: Date.now(), //(Manana preguntamos, si es ultima vez que ingreso)
+            cantidadPost: post.length,
             post:post,
             likes:[],
             //subMessages:[]

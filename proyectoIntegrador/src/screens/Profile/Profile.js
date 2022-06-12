@@ -3,16 +3,52 @@ import React, {Component} from 'react'
 import {auth, db} from '../../firebase/config'
 
 
-function Profile(props){
-  return(
-    <View style={style.container}>
-      <Text>{auth.currentUser.email}</Text>
-      <TouchableOpacity onPress={()=> props.route.params.logout()}>
-        <Text style={style.boton}>Cerrar Sesion</Text>
-      </TouchableOpacity>
-    </View>
-  )
+
+
+class Profile extends Component{
+  constructor(props){
+    super(props)
+    this.state={
+      info:[],
+    }
+  }
+
+  componentDidMount(){
+    db.collection('users').onSnapshot(
+      (docs)=>{
+        let users = []
+        docs.forEach(
+          doc => {
+            users.push({
+              id:doc.id,
+              data: doc.data()
+            })
+          }
+        )
+        this.setState({
+          info:users,
+        })
+  
+      }
+    )
+  }
+
+  render(){
+    return(
+      <View style={style.container}>
+        <Text>{auth.currentUser.email}</Text>
+        <TouchableOpacity onPress={()=> props.route.params.logout()}>
+          <Text style={style.boton}>Cerrar Sesion</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
 }
+
+  
+
+
+
 
 const style = StyleSheet.create({
   container:{ 

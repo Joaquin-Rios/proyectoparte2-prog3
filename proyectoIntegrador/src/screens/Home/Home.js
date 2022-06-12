@@ -52,7 +52,7 @@ class Home extends Component {
 
 
 
-        <TouchableOpacity style={styles.btn} onPress={()=> this.props.navigation.navigate('Message')}>
+        <TouchableOpacity style={styles.btn} onPress={()=> this.props.navigation.navigate('NewPosts')}>
           <Text style={styles.textBtn}>Enviar mensaje a Facu</Text>
         </TouchableOpacity>
       </View>

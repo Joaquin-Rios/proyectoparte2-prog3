@@ -5,6 +5,7 @@ import Profile from '../screens/Profile/Profile'
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import Posts from '../components/Posts/Posts';
+import NewPosts from '../screens/NewPosts/NewPosts';
 
 const Tab = createBottomTabNavigator()
 
@@ -19,7 +20,7 @@ export default function TabNavigation(props) {
            }
           />
 
-        <Tab.Screen name='NewPosts' component={Posts}
+        <Tab.Screen name='NewPosts' component={NewPosts}
          options ={
            {tabBarIcon:()=> <AntDesign name="instagram" size={24} color="black" />}
            }
