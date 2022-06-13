@@ -38,8 +38,19 @@ class StackNavigation extends Component{
     }
 
     
-    signUp(email, password){
+    signUp(email, password, username){
         auth.createUserWithEmailAndPassword(email, password)
+        .then(response => {
+            db.collection('users').add({
+                owner: email,
+                username: username,
+                createdAt: Date.now()
+            })
+            .then(res => console.log('termina el add'))
+            .catch(error => console.log(error))
+
+        }
+        )
         .then(response => this.setState({loggedIn: true}))
         .catch(error => this.setState({errorMessage:error.message}))
     }
@@ -54,34 +65,6 @@ class StackNavigation extends Component{
         })
         .catch(error =>this.setState({errorMessage: error.message}))
     }
-
-    newPosts(post){
-        db.collection('posts').add({
-            owner:auth.currentUser.email,
-            createdAt: Date.now(),
-            post:post,
-            likes:[],
-            //subMessages:[]
-        })
-        .then(response => console.log(response))
-        .catch(error => console.log(error.message))
-    }
-
-    Users(user){
-        db.collection('users').add({
-            owner:auth.currentUser.email,
-            username:auth.currentUser.username,
-            createdAt: Date.now(), //(Manana preguntamos, si es ultima vez que ingreso)
-            cantidadPost: post.length,
-            post:post,
-            likes:[],
-            //subMessages:[]
-        })
-        .then(response => console.log(response))
-        .catch(error => console.log(error.message))
-    }
-    
-    
 
     render(){
         return(
@@ -111,7 +94,7 @@ class StackNavigation extends Component{
                                 name='Register' 
                                 children={
                                     (props)=> <Register 
-                                    signUp={(email, password)=> this.signUp(email, password)}
+                                    signUp={(email, password, username)=> this.signUp(email, password, username)}
                                     errorMessage={this.state.errorMessage}
                                     {...props}
                                     />

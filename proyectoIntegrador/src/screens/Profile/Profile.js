@@ -9,35 +9,43 @@ class Profile extends Component{
   constructor(props){
     super(props)
     this.state={
-      info:[],
+      user: ''
     }
   }
 
   componentDidMount(){
-    db.collection('users').onSnapshot(
-      (docs)=>{
-        let users = []
-        docs.forEach(
-          doc => {
-            users.push({
-              id:doc.id,
-              data: doc.data()
+    db.collection('users').where('owner', '==', auth.currentUser.email).onSnapshot(
+      (userEncontrado)=>{
+        let userFiltrado = []
+
+        userEncontrado.forEach(
+          user => {
+            userFiltrado.push({
+              data: user.data()
             })
           }
         )
+
         this.setState({
-          info:users,
+          user: userFiltrado[0].data,
         })
-  
       }
     )
+
+    /* db.collection('posts').where('owner', '==', auth.currentUser.email).onSnapshot(
+    ) */
+
   }
 
   render(){
+    console.log(auth.currentUser.metadata.lastSignInTime)
     return(
       <View style={style.container}>
-        <Text>{auth.currentUser.email}</Text>
-        <TouchableOpacity onPress={()=> props.route.params.logout()}>
+        <Text>Email: {this.state.user.owner}</Text>
+        <Text>Nombre de usuario: {this.state.user.username}</Text>
+        <Text>Ultimo inicio de sesion: {auth.currentUser.metadata.lastSignInTime} </Text>
+
+        <TouchableOpacity onPress={()=> this.props.route.params.logout()}>
           <Text style={style.boton}>Cerrar Sesion</Text>
         </TouchableOpacity>
       </View>

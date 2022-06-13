@@ -1,38 +1,51 @@
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import React, {Component} from 'react'
+import { auth, db } from '../../firebase/config';
 
 
 class NewPosts extends Component {
     constructor(props){
         super(props)
         this.state = {
-            message:'',
+            description:'',
         }
     }
-
+    
+    newPosts(post){
+        db.collection('posts').add({
+            owner:auth.currentUser.email,
+            createdAt: Date.now(),
+            description: this.state.description
+            
+        })
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+    }
 
     render(){
 
         return (
             <View>
-              <Text>Enviale un mensaje a Facu</Text>
+              <Text>Descripcion de la foto:</Text>
             <TextInput 
               style={styles.textarea}
               onChangeText= {(text)=> this.setState({
-                  message: text
+                  description: text
               })}
-              value={this.state.message}
+              value={this.state.description}
             />
             <TouchableOpacity
                 style={styles.btn}
                 onPress={() => {
-                    this.props.route.params.newMessage(this.state.message)
+                    this.newPosts(this.state.description)
                     this.setState({
-                        message:''
+                        description:''
                     })
+                    this.props.navigation.navigate('Home')
+
                 }}
             >
-              <Text>Enviar mensaje</Text>
+              <Text>Publicar Posteo</Text>
             </TouchableOpacity>
           </View>
         )
