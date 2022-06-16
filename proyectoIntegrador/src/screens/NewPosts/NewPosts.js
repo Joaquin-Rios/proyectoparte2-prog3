@@ -15,7 +15,9 @@ class NewPosts extends Component {
         db.collection('posts').add({
             owner:auth.currentUser.email,
             createdAt: Date.now(),
-            description: this.state.description
+            description: this.state.description,
+            likes:[],
+            comments:[]
             
         })
         .then(response => console.log(response))

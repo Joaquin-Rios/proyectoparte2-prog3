@@ -19,7 +19,7 @@ class Posts extends Component {
 
     componentDidMount(){
         const documento = this.props.info.data
-       // const estaMiLike = documento.likes.includes(auth.currentUser.email)
+        const estaMiLike = documento.likes.includes(auth.currentUser.email)
         
         if(documento.likes){
             this.setState({
@@ -27,19 +27,20 @@ class Posts extends Component {
             })
         }
 
-        /*
+        
         if(estaMiLike){
             this.setState({
                 miLike:true
             })
         }
-        */
+        
 
     }
 
-    /*
+    
     like(){
-        const documento = this.props.info
+        const documento = this.props.info.id
+        console.log(documento)
         db.collection('posts').doc(documento).update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
@@ -53,8 +54,8 @@ class Posts extends Component {
     }
 
     unlike(){
-        const documento = this.props.info
-        db.collection('posts').doc(documento.data.owner).update({
+        const documento = this.props.info.id
+        db.collection('posts').doc(documento).update({
             likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
         .then(
@@ -65,7 +66,7 @@ class Posts extends Component {
         )
         .catch(error=> console.log(error))
     }
-    */
+    
     
 
 
@@ -80,7 +81,7 @@ class Posts extends Component {
                     </View>
                     <View style={styles.containerLike}>
                         <Text style={styles.likesCounter}>{this.state.cantLikes}</Text>
-                        {/*
+                        {
                             this.state.miLike
                             ?
                             
@@ -92,13 +93,13 @@ class Posts extends Component {
                                 <FontAwesome name='heart-o' size={24} color='black' /> 
                             </TouchableOpacity>
 
-                        */}
+                        }
                     </View>
                 </View>
                 <TouchableOpacity 
                 onPress={() => this.props.navigation.navigate('Comments', {id: this.props.info.id})}
                 >
-                    <Text>Comentar este mensaje</Text>
+                    <Text>Comentar este Posteo</Text>
                 </TouchableOpacity>
             </>
         )

@@ -8,6 +8,7 @@ import Register from "../screens/Register/Register";
 import { StatusBar } from 'expo-status-bar';
 import TabNavigation from './TabNavigation';
 import Profile from '../screens/Profile/Profile';
+import Comments from '../screens/Comments/Comments';
 
 
 
@@ -86,6 +87,10 @@ class StackNavigation extends Component{
                                 }
                             }
                             />
+                            <Stack.Screen
+                            name='Comments'
+                            component={Comments}
+                            />
                            
                         </Stack.Group>
                         :
@@ -114,6 +119,8 @@ class StackNavigation extends Component{
                                 headerShown:false
                             }}
                             />
+
+                            
                         </Stack.Group>
                     }      
                 </Stack.Navigator>
