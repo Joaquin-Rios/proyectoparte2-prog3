@@ -1,6 +1,7 @@
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import React, {Component} from 'react'
 import { auth, db } from '../../firebase/config';
+import MyCamera from '../../components/MyCamera/MyCamera';
 
 
 class NewPosts extends Component {
@@ -8,7 +9,17 @@ class NewPosts extends Component {
         super(props)
         this.state = {
             description:'',
+            mostrarComponenteCamara: true,
+            urlFoto:''
         }
+    }
+
+    cuandoSubaLaImagen(url){
+        console.log(url)
+        this.setState({
+            mostrarComponenteCamara:false,
+            urlFoto: url
+        })
     }
     
     newPosts(post){
@@ -17,7 +28,8 @@ class NewPosts extends Component {
             createdAt: Date.now(),
             description: this.state.description,
             likes:[],
-            comments:[]
+            comments:[],
+            photo: this.state.urlFoto
             
         })
         .then(response => console.log(response))
@@ -27,29 +39,38 @@ class NewPosts extends Component {
     render(){
 
         return (
-            <View>
-              <Text>Descripcion de la foto:</Text>
-            <TextInput 
-              style={styles.textarea}
-              onChangeText= {(text)=> this.setState({
-                  description: text
-              })}
-              value={this.state.description}
-            />
-            <TouchableOpacity
-                style={styles.btn}
-                onPress={() => {
-                    this.newPosts(this.state.description)
-                    this.setState({
-                        description:''
-                    })
-                    this.props.navigation.navigate('Home')
+            <>
+            {
+                 this.state.mostrarComponenteCamara ?
+                 <MyCamera cuandoSubaLaImagen={(url)=> this.cuandoSubaLaImagen(url)}/>
+                 :
+                 <View>
+                    <Text>Descripcion de la foto:</Text>
+                    <TextInput 
+                    style={styles.textarea}
+                    onChangeText= {(text)=> this.setState({
+                        description: text
+                    })}
+                    value={this.state.description}
+                    />
+                    <TouchableOpacity
+                        style={styles.btn}
+                        onPress={() => {
+                            this.newPosts(this.state.description)
+                            this.setState({
+                                description:''
+                            })
+                            this.props.navigation.navigate('Home')
 
-                }}
-            >
-              <Text>Publicar Posteo</Text>
-            </TouchableOpacity>
-          </View>
+                        }}
+                    >
+                    <Text>Publicar Posteo</Text>
+                    </TouchableOpacity>
+                </View>
+
+            }
+            </>
+            
         )
     }
 }
