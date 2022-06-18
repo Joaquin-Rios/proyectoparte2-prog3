@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, StyleSheet } from 'react-native'
 import React, {Component} from 'react'
 import {auth, db} from '../../firebase/config'
+import Posts from '../../components/Posts/Posts'
 
 
 
@@ -9,7 +10,9 @@ class Profile extends Component{
   constructor(props){
     super(props)
     this.state={
-      user: ''
+      user: '',
+      userPost: [],
+      loading: true,
     }
   }
 
@@ -25,25 +28,46 @@ class Profile extends Component{
             })
           }
         )
-
         this.setState({
-          user: userFiltrado[0].data,
+        user: userFiltrado[0].data,
         })
       }
     )
 
-    /* db.collection('posts').where('owner', '==', auth.currentUser.email).onSnapshot(
-    ) */
+     db.collection('posts').where('owner', '==', auth.currentUser.email).onSnapshot(
+      (docs)=>{
+        let posts = []
+        docs.forEach(
+          doc => {
+            posts.push({
+              id:doc.id,
+              data: doc.data()
+            })
+          }
+        )
+        this.setState({
+          info:posts,
+          loading:false
+        })
 
+      })
+    
   }
 
   render(){
-    console.log(auth.currentUser.metadata.lastSignInTime)
     return(
       <View style={style.container}>
         <Text>Email: {this.state.user.owner}</Text>
         <Text>Nombre de usuario: {this.state.user.username}</Text>
         <Text>Ultimo inicio de sesion: {auth.currentUser.metadata.lastSignInTime} </Text>
+
+        <FlatList
+          data={this.state.userPost}
+          keyExtractor={item => item.id.toString()} 
+            renderItem ={({item}) =>
+            <Posts info={item} navigation={this.props.navigation}/>
+            }
+        />
 
         <TouchableOpacity onPress={()=> this.props.route.params.logout()}>
           <Text style={style.boton}>Cerrar Sesion</Text>

@@ -52,7 +52,7 @@ class MyCamera extends Component {
                 .then( url => {
                     console.log(url)
                     this.props.cuandoSubaLaImagen(url);
-                    this.setState({urlFoto:''})
+                    //this.setState({url:''})
                 })
             })
         })
@@ -61,7 +61,10 @@ class MyCamera extends Component {
 
     descartarFoto(){
         console.log('Foto descartada')
-        //Aqui cambiar el estado de la urlFoto a '' y mostrarCamara a true
+        this.setState({
+            urlFoto: "",
+            mostrarCamara: true
+        })
     }
 
 

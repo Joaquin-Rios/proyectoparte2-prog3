@@ -39,17 +39,29 @@ class Comments extends Component {
     }
     
     render(){
+        console.log(this.state.comentarios)
         return (
           <View style={styles.container}>
-            <FlatList
+            
+            {
+                
+                this.state.comentarios.length !== 0 ?
+                <FlatList
             data={this.state.comentarios}
             keyExtractor={( item ) => item.createdAt.toString()}
             renderItem={ ( {item} ) => <View style={styles.comment}>
                 <Text>{item.owner}</Text>
                 <Text>{item.description}</Text>
-            </View>
-        }
+            </View>}
             />
+                
+            :
+
+            <View>
+                <Text>Se el primero en comentar</Text>
+            </View>   
+
+            }
             <View>
                 <TextInput
                 placeholder='Agrega tu comentario'

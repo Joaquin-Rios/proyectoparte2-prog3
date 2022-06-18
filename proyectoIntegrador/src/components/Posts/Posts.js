@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity,Image } from 'react-native'
 import React, {Component} from 'react'
 import { FontAwesome } from '@expo/vector-icons'
 import firebase from 'firebase'
@@ -77,6 +77,11 @@ class Posts extends Component {
                 <View style={styles.container}>
                     <View>
                         <Text style={styles.Owner}>{documento.owner}</Text>
+                        <Image 
+                            source={{uri: `${documento.photo}`}}
+                            resizeMode='contain'
+                            style={styles.Image}
+                        />
                         <Text style={styles.Post}>{documento.description}</Text>
                     </View>
                     <View style={styles.containerLike}>
@@ -131,7 +136,12 @@ const styles= StyleSheet.create({
     likesCounter:{
         marginRight:8,
 
-    }
+    },
+    Image: {
+        width: 350,
+        height: 400,
+        borderRadius: 4,
+    },
 })
 
 export default Posts
