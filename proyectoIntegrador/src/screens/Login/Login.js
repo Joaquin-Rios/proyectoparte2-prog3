@@ -24,6 +24,7 @@ class Login extends Component {
         return(
             <View style={style.container}>
                 <Text>Login</Text>
+
                 <TextInput style={style.field}
                     keyboardType='email-address'
                     placeholder="email"
@@ -34,10 +35,18 @@ class Login extends Component {
                     placeholder="password"
                     secureTextEntry={true}
                     onChangeText={ text => this.setState({password:text})} />
+
+                {this.state.email !== ''  && this.state.password !== '' ?
                 
                 <TouchableOpacity onPress={() => this.props.route.params.signIn(this.state.email, this.state.password)} >
                     <Text style={style.boton}>Loguearme</Text>
                 </TouchableOpacity>
+                :
+                <TouchableOpacity style={style.bloquearBoton}>
+                    <Text>Loguearme</Text>
+                </TouchableOpacity>
+                
+                }
 
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')} >
                     <Text style={style.texto}>No tenes cuenta?</Text>
@@ -78,6 +87,17 @@ const style = StyleSheet.create({
         padding: 5,
         fontFamily: 'Arial'
 
+    },
+    bloquearBoton:{
+        opacity: 0.5,
+        backgroundColor: '#28a745',
+        padding: 13,
+        textAlign: 'center',
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#28a745s',
+        marginVertical: 10,
     }
 });
 

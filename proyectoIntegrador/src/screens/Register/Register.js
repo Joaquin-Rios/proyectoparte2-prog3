@@ -16,18 +16,12 @@ class Register extends Component {
     componentDidMount(){
     }
 
-    /*onSubmit(email, password){
-        auth.createUserWithEmailAndPassword(email, password)
-        .then(response => this.setState({register: true}, ()=>console.log(this.state.register) ))
-        .catch(error => this.setState({error: 'Fallo el registro'}, ()=>console.log(error)))
-    }
-    */
-
 
     render(){
         return(
             <View style={style.container}>
                 <Text>Register</Text>
+
                 <TextInput style={style.field}
                     keyboardType='email-address'
                     placeholder="email"
@@ -43,10 +37,19 @@ class Register extends Component {
                     placeholder="password"
                     secureTextEntry={true}
                     onChangeText={ text => this.setState({password:text})} />
-                
-                <TouchableOpacity onPress={() => this.props.signUp(this.state.email, this.state.password, this.state.username)} >
+
+                {this.state.email !== '' && this.state.username !== '' && this.state.password !== '' ?
+                    <TouchableOpacity onPress={() => this.props.signUp(this.state.email, this.state.password, this.state.username)} >
                     <Text style={style.boton}>Registrarme</Text>
-                </TouchableOpacity>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={style.bloquearBoton}>
+                        <Text>Registrarme</Text>
+                    </TouchableOpacity>
+
+                }
+                
+               
 
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Login') } >
                     <Text style={style.texto}>Ya tenes una cuenta?</Text>
@@ -87,6 +90,17 @@ const style = StyleSheet.create({
         padding: 5,
         fontFamily: 'Arial'
 
+    },
+    bloquearBoton:{
+        opacity: 0.5,
+        backgroundColor: '#28a745',
+        padding: 13,
+        textAlign: 'center',
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#28a745s',
+        marginVertical: 10,
     }
 });
 

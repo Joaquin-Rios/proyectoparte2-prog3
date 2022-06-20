@@ -33,8 +33,6 @@ class Posts extends Component {
                 miLike:true
             })
         }
-        
-
     }
 
     
@@ -67,11 +65,19 @@ class Posts extends Component {
         .catch(error=> console.log(error))
     }
     
-    
+    borrarPost(){
+        console.log(this.props.info.data.owner)
+        console.log(auth.currentUser.email)
+        const document = this.props.info
+        db.collection("posts").doc(document.id).delete()
+        .then(() => console.log("Imagen eliminada"))
+        .catch(error => console.log(error))
+    }
 
 
     render(){
         const documento = this.props.info.data
+        const autorPost = documento.owner
         return (
             <>
                 <View style={styles.container}>
@@ -106,6 +112,14 @@ class Posts extends Component {
                 >
                     <Text>Comentar este Posteo</Text>
                 </TouchableOpacity>
+
+                {autorPost == auth.currentUser.email ?
+                    <TouchableOpacity onPress={() => this.borrarPost()}>
+                        <Text>Borrar Posteo</Text>
+                    </TouchableOpacity>
+                    :
+                    <></>
+                }
             </>
         )
     }

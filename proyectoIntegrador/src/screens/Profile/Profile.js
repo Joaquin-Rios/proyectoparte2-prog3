@@ -46,7 +46,7 @@ class Profile extends Component{
           }
         )
         this.setState({
-          info:posts,
+          userPost:posts,
           loading:false
         })
 
@@ -64,8 +64,7 @@ class Profile extends Component{
         <FlatList
           data={this.state.userPost}
           keyExtractor={item => item.id.toString()} 
-            renderItem ={({item}) =>
-            <Posts info={item} navigation={this.props.navigation}/>
+          renderItem ={({item}) => <Posts info={item} navigation={this.props.navigation}/>
             }
         />
 
