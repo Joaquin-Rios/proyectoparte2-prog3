@@ -61,12 +61,21 @@ class Profile extends Component{
         <Text>Nombre de usuario: {this.state.user.username}</Text>
         <Text>Ultimo inicio de sesion: {auth.currentUser.metadata.lastSignInTime} </Text>
 
-        <FlatList
-          data={this.state.userPost}
-          keyExtractor={item => item.id.toString()} 
-          renderItem ={({item}) => <Posts info={item} navigation={this.props.navigation}/>
-            }
-        />
+        
+        {
+          this.state.loading ?
+          <Text>Por el momento no tiene posteos</Text>
+           :
+           <FlatList
+              data={this.state.userPost}
+              keyExtractor={item => item.id.toString()} 
+              renderItem ={({item}) => <Posts info={item} navigation={this.props.navigation}/>
+              }
+            />
+
+        }
+        
+        
 
         <TouchableOpacity onPress={()=> this.props.route.params.logout()}>
           <Text style={style.boton}>Cerrar Sesion</Text>
@@ -84,7 +93,8 @@ class Profile extends Component{
 const style = StyleSheet.create({
   container:{ 
       padding: 10,
-      marginTop: 20
+      marginTop: 20,
+      flex: 2,
   },
   field: {
       height: 20,
@@ -111,7 +121,14 @@ const style = StyleSheet.create({
       padding: 5,
       fontFamily: 'Arial'
 
-  }
+  },
+  section2:{
+    backgroundColor: 'white',
+    flex: 2,
+    borderWidth: 1,
+    borderRadius: 4,
+    textAlign: 'center'
+},
 });
  
 

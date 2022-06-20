@@ -36,7 +36,7 @@ class Home extends Component {
 
   render(){
     return (
-      <View>
+      <View style={styles.section2}>
        <Text>Estos son los Posts recientes:</Text>
 
         {
@@ -70,7 +70,14 @@ const styles = StyleSheet.create({
   },
   textBtn:{
     color:'white'
-  }
+  },
+  section2:{
+    backgroundColor: 'white',
+    flex: 2,
+    borderWidth: 1,
+    borderRadius: 4,
+    textAlign: 'center'
+},
 })
 
 export default Home
