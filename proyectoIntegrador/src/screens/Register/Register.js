@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
 import { auth, db } from "../../firebase/config";
+import { AntDesign } from '@expo/vector-icons'; 
 
 class Register extends Component {
     constructor(props){
@@ -9,7 +10,6 @@ class Register extends Component {
             email: '',
             username: '',
             password: '',
-            error: null
         }
     }
 
@@ -49,7 +49,11 @@ class Register extends Component {
 
                 }
                 
-               
+                <View style={this.props.errorRegister ? style.errorContainerShow : style.errorContainerHide}>
+                    <AntDesign name="exclamationcircle" size={24} color="white" />
+                    <Text style={style.errorText}>{this.props.errorRegister}</Text>
+                </View>
+                
 
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Login') } >
                     <Text style={style.texto}>Ya tenes una cuenta?</Text>
@@ -101,6 +105,29 @@ const style = StyleSheet.create({
         borderStyle: 'solid',
         borderColor: '#28a745s',
         marginVertical: 10,
+    },
+    errorContainerHide:{
+        display: 'flex',
+        flexDirection: 'row',
+        backgroundColor: '#EF476F',
+        borderRadius: 4,
+        padding: 10,
+        gap: 5,
+        opacity: 0
+    },
+    errorContainerShow:{
+        display: 'flex',
+        flexDirection: 'row',
+        backgroundColor: '#EF476F',
+        borderRadius: 4,
+        padding: 10,
+        gap: 5,
+    },
+    errorText: {
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        fontSize: 15,
     }
 });
 

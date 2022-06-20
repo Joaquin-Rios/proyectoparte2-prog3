@@ -19,7 +19,8 @@ class StackNavigation extends Component{
         super(props)
         this.state={
             loggedIn: false,
-            errorMessage:'Error1'
+            errorRegister: '',
+            errorLogin: ''
         }
     }
     
@@ -49,11 +50,13 @@ class StackNavigation extends Component{
             })
             .then(res => console.log('termina el add'))
             .catch(error => console.log(error))
-
-        }
-        )
+        })
         .then(response => this.setState({loggedIn: true}))
-        .catch(error => this.setState({errorMessage:error.message}))
+        .catch(error => this.setState({errorRegister: `Problems creating the user because ${error.message}`}))
+
+        .catch(erorr => {
+            this.setState({errorRegister: error.message})
+        })
     }
 
 
@@ -64,7 +67,7 @@ class StackNavigation extends Component{
                 loggedIn:true
             })
         })
-        .catch(error =>this.setState({errorMessage: error.message}))
+        .catch(error =>this.setState({errorLogin: error.message}))
     }
 
     render(){
@@ -98,12 +101,10 @@ class StackNavigation extends Component{
                             <Stack.Screen 
                                 name='Register' 
                                 children={
-                                    (props)=> <Register 
-                                    signUp={(email, password, username)=> this.signUp(email, password, username)}
-                                    errorMessage={this.state.errorMessage}
+                                    (props)=> <Register signUp={(email, password, username)=> this.signUp(email, password, username)}
+                                    errorRegister={this.state.errorRegister}
                                     {...props}
                                     />
-                    
                                 }
                                 options={{
                                     headerShown:false
@@ -111,10 +112,13 @@ class StackNavigation extends Component{
                             />
                             <Stack.Screen 
                             name='Login' 
-                            component={Login}
-                            initialParams={{
-                                signIn: (email, password)=> this.signIn(email, password)
-                            }}
+                             
+                            children={
+                                (props)=> <Login signIn={(email, password)=> this.signIn(email, password)}
+                                errorLogin={this.state.errorLogin}
+                                {...props}
+                                />
+                            }    
                             options={{
                                 headerShown:false
                             }}
