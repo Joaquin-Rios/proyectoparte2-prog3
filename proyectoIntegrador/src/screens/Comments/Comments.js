@@ -16,9 +16,11 @@ class Comments extends Component {
         const id = this.props.route.params.id
         db.collection('posts').doc(id).onSnapshot(doc => {
                 this.setState({
-                    comentarios:doc.data().comentarioSave
+                    comentarios:doc.data().comentarios
+                    
                 })
             })
+            console.log(this.state.comentarios)
     }
 
     comentar(mensaje){
@@ -30,7 +32,7 @@ class Comments extends Component {
 
         if(mensaje !== ''){
             db.collection('posts').doc(this.props.route.params.id).update({
-                comentarioSave:firebase.firestore.FieldValue.arrayUnion(comment)
+                comentarios:firebase.firestore.FieldValue.arrayUnion(comment)
             })
             .then(response => this.setState({nuevoComentario:''}))
             .catch(error => console.log(error))
@@ -44,7 +46,7 @@ class Comments extends Component {
           <View style={styles.container}>
             
             {
-                this.state.comentarios.length !== 0 ?
+             // this.state.comentarios.length !== 0 ?
                     <FlatList
                         data={this.state.comentarios}
                         keyExtractor={( item ) => item.createdAt.toString()}
@@ -54,8 +56,8 @@ class Comments extends Component {
                         </View>}
                     />
                 
-                :
-                    <View><Text>Se el primero en comentar</Text></View>   
+              //:
+               //    <View><Text>Se el primero en comentar</Text></View>   
             }
 
             <View>

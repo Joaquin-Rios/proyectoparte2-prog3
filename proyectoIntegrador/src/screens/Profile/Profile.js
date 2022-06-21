@@ -91,20 +91,13 @@ class Profile extends Component{
 
 
 const style = StyleSheet.create({
-  container:{ 
-      padding: 10,
-      marginTop: 20,
-      flex: 2,
-  },
-  field: {
-      height: 20,
-      paddingVertical: 15,
-      paddingHorizontal: 10,
-      borderWidth: 1,
-      borderRadius: 6,
-      borderColor: '#ccc',
-      borderStyle: 'solid',
-      marginVertical: 10
+  container:{
+    backgroundColor: 'white',
+    flex: 2,
+    padding:3,
+    //borderWidth: 1,
+    //borderRadius: 4,
+    textAlign: 'center'
   },
   boton:{
       paddingHorizontal: 10,
@@ -121,14 +114,8 @@ const style = StyleSheet.create({
       padding: 5,
       fontFamily: 'Arial'
 
-  },
-  section2:{
-    backgroundColor: 'white',
-    flex: 2,
-    borderWidth: 1,
-    borderRadius: 4,
-    textAlign: 'center'
-},
+  }
+  
 });
  
 

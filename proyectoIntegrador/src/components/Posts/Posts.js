@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet, TouchableOpacity,Image } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native'
 import React, {Component} from 'react'
 import { FontAwesome } from '@expo/vector-icons'
 import firebase from 'firebase'
 import {auth, db} from '../../firebase/config'
+import Comments from '../../screens/Comments/Comments'
 
 
 class Posts extends Component {
@@ -12,8 +13,6 @@ class Posts extends Component {
         this.state={
             cantLikes:0,
             miLike:false,
-            arrayLikes:[],
-            //arrSubMessages:[]
         }
     }
 
@@ -80,18 +79,32 @@ class Posts extends Component {
         const autorPost = documento.owner
         return (
             <>
-                <View style={styles.container}>
+                <View style={style.container}>
                     <View>
-                        <Text style={styles.Owner}>{documento.owner}</Text>
-                        <Image 
+                        <Text style={style.Owner}>{documento.owner}</Text>
+                        <Image style={style.Image}
                             source={{uri: `${documento.photo}`}}
                             resizeMode='contain'
-                            style={styles.Image}
                         />
-                        <Text style={styles.Post}>{documento.description}</Text>
+                        <Text style={style.Post}>{documento.description}</Text>
                     </View>
-                    <View style={styles.containerLike}>
-                        <Text style={styles.likesCounter}>{this.state.cantLikes}</Text>
+
+                    {/*
+                         <View style={style.commentContainer}>
+                         <FlatList
+                             data={this.props.info.data.comentarios.length}
+                             keyExtractor={item => item.createdAt.toString()}
+                             renderItem={({item})=>
+                                 <Comments data={item}/>
+                             }
+                         />
+                     </View>
+
+                            */}
+                   
+
+                    <View style={style.containerLike}>
+                        <Text style={style.likesCounter}>{this.state.cantLikes}</Text>
                         {
                             this.state.miLike
                             ?
@@ -106,43 +119,61 @@ class Posts extends Component {
 
                         }
                     </View>
-                </View>
-                <TouchableOpacity 
-                onPress={() => this.props.navigation.navigate('Comments', {id: this.props.info.id})}
-                >
-                    <Text>Comentar este Posteo</Text>
-                </TouchableOpacity>
 
-                {autorPost == auth.currentUser.email ?
-                    <TouchableOpacity onPress={() => this.borrarPost()}>
-                        <Text>Borrar Posteo</Text>
+                </View>
+
+                <View style={style.containerBoton}>
+                    <TouchableOpacity style={style.boton}
+                        onPress={() => this.props.navigation.navigate('Comments', {id: this.props.info.id})}
+                    >
+                        <Text>Comentar</Text>
                     </TouchableOpacity>
+
+                    {autorPost == auth.currentUser.email ?
+                        <TouchableOpacity style={style.boton} onPress={() => this.borrarPost()}>
+                            <Text>Borrar</Text>
+                        </TouchableOpacity>
                     :
                     <></>
-                }
+                    }
+
+                </View>
+
+                
+
+
+                
             </>
         )
     }
 }
 
-const styles= StyleSheet.create({
+const style= StyleSheet.create({
     container:{
         flex:1,
         flexDirection:'row',
         justifyContent:'space-between',
-        paddingVertical:8,
-        paddingHorizontal:6,
+        //paddingVertical:5,
+        paddingHorizontal:5,
         borderRadius:5,
-        backgroundColor:'#F5E6E8',
-        marginHorizontal:10,
-        marginTop:8
+        borderWidth: 1,
+        backgroundColor:'#D3D3D3',
+        //marginHorizontal:10,
+        //marginTop:8
+    },
+    containerBoton:{
+        justifyContent: 'space-between',
+        margin: 10,
+
     },
     Owner:{
+        textAlign: 'left',
         fontWeight:600
     },
     Post:{
-        paddingLeft:8,
-        paddingVertical:8
+        //paddingLeft:8,
+        paddingVertical:5,
+        fontWeight: 600,
     },
     containerLike:{
         flexDirection:'row',
@@ -152,10 +183,22 @@ const styles= StyleSheet.create({
 
     },
     Image: {
-        width: 350,
-        height: 400,
-        borderRadius: 4,
+        margin: 10,
+        width: 300,
+        height: 200,
+        
     },
+    boton:{
+        paddingHorizontal: 5,
+        paddingVertical: 6,
+        textAlign: 'center',
+        backgroundColor: '#28a745',
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin:2
+    }
 })
 
 export default Posts

@@ -37,22 +37,22 @@ class Buscador extends Component {
 
     render(){
         return(
-            <View style={styles.section1}>
-                        <Text style={styles.h1}>Buscador</Text>
-                        <TextInput
+            <View style={styles.container}>
+                        
+                        <TextInput style={styles.formulario}
                             keyboardType='default'
                             placeholder='Buscar Usuario por email'
                             value={this.state.dataFiltrada}
                             onChangeText={(text) => this.setState({ dataFiltrada: text })}
-                            style={styles.formulario}
+                            
                         />
-                        <TouchableOpacity style={styles.botonForm} onPress={()=>this.buscador(this.state.dataFiltrada)}>
-                            <Text style={styles.textoBoton}>Buscar</Text>
+                        <TouchableOpacity style={styles.boton} onPress={()=>this.buscador(this.state.dataFiltrada)}>
+                            <Text>Buscar</Text>
                         </TouchableOpacity>
                     {
                         this.state.resultado ?
 
-                            <View style={styles.section2}>
+                            <View style={styles.container}>
                             <Text>Resultados de: {this.state.dataFiltrada}</Text>
                             <FlatList
                                 data={this.state.postFiltrado}
@@ -73,9 +73,7 @@ class Buscador extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
-        backgroundColor: '#909f43',
     },
     cover: {
         flex: 1,
@@ -93,36 +91,16 @@ const styles = StyleSheet.create({
         borderColor: '#FFFFFF',
         borderRadius: 4
     },
-    botonForm: {
-        backgroundColor: '#030303',
-        borderWidth: 2,
-        borderColor: '#FFFFFF',
+    boton:{
+        paddingHorizontal: 5,
+        paddingVertical: 6,
+        textAlign: 'center',
+        backgroundColor: '#28a745',
         borderRadius: 4,
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 50,
-        padding: 5,
-        margin: 10,
-        marginHorizontal: 100
-    },
-    textoBoton: {
-        color: '#FFFFFF',
-        fontSize: 'large'
-    },
-    section1:{
-        flex: 1,
-    },
-    section2:{
-        backgroundColor: 'gray',
-        flex: 2,
         borderWidth: 1,
-        borderRadius: 4,
-        textAlign: 'center'
-    },
-    h1: {
-        color: '#FFFFFF',
-        fontSize: 50,
-        textAlign: 'center'
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin:2
     },
 })
 export default Buscador;

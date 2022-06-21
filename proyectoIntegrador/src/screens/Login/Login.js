@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
 import { auth } from "../../firebase/config";
+import { AntDesign } from '@expo/vector-icons'; 
 
 class Login extends Component {
     constructor(){
@@ -9,15 +10,8 @@ class Login extends Component {
             email: '',
             password: '',
             loggedIn: false,
-            error: null
         }
     }
-
-   /* onSubmit(email, password){
-        auth.signInWithEmailAndPassword(email, password)
-        .then(response => this.setState({loggedIn: true}, ()=>console.log(this.state.loggedIn) ))
-        .catch(error => this.setState({error: 'Fallo en las credenciales'}, ()=>console.log(error)))
-    } */
 
 
     render(){
@@ -38,7 +32,7 @@ class Login extends Component {
 
                 {this.state.email !== ''  && this.state.password !== '' ?
                 
-                <TouchableOpacity onPress={() => this.props.route.params.signIn(this.state.email, this.state.password)} >
+                <TouchableOpacity onPress={() => this.props.signIn(this.state.email, this.state.password)} >
                     <Text style={style.boton}>Loguearme</Text>
                 </TouchableOpacity>
                 :
@@ -47,6 +41,11 @@ class Login extends Component {
                 </TouchableOpacity>
                 
                 }
+
+                <View style={this.props.errorLogin ? style.errorContainerShow : style.errorContainerHide}>
+                    <AntDesign name="exclamationcircle" size={24} color="white" />
+                    <Text style={style.errorText}>{this.props.errorLogin}</Text>
+                </View>
 
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')} >
                     <Text style={style.texto}>No tenes cuenta?</Text>
@@ -98,6 +97,29 @@ const style = StyleSheet.create({
         borderStyle: 'solid',
         borderColor: '#28a745s',
         marginVertical: 10,
+    },
+    errorContainerHide:{
+        display: 'flex',
+        flexDirection: 'row',
+        backgroundColor: '#EF476F',
+        borderRadius: 4,
+        padding: 10,
+        gap: 5,
+        opacity: 0
+    },
+    errorContainerShow:{
+        display: 'flex',
+        flexDirection: 'row',
+        backgroundColor: '#EF476F',
+        borderRadius: 4,
+        padding: 10,
+        gap: 5,
+    },
+    errorText: {
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        fontSize: 15,
     }
 });
 

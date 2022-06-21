@@ -28,7 +28,7 @@ class NewPosts extends Component {
             createdAt: Date.now(),
             description: this.state.description,
             likes:[],
-            comments:[],
+            comentarios: [],
             photo: this.state.urlFoto
             
         })
@@ -45,7 +45,7 @@ class NewPosts extends Component {
                  <MyCamera cuandoSubaLaImagen={(url)=> this.cuandoSubaLaImagen(url)}/>
                  :
                  <View>
-                    <Text>Descripcion de la foto:</Text>
+                    <Text> Descripción de la foto:</Text>
                     <TextInput 
                     style={styles.textarea}
                     onChangeText= {(text)=> this.setState({
@@ -54,7 +54,7 @@ class NewPosts extends Component {
                     value={this.state.description}
                     />
                     <TouchableOpacity
-                        style={styles.btn}
+                        style={styles.boton}
                         onPress={() => {
                             this.newPosts(this.state.description)
                             this.setState({
@@ -83,10 +83,16 @@ const styles = StyleSheet.create({
         minHeight:60,
         marginTop:10
     },
-    btn:{
-        marginTop:16,
-        borderColor:'red',
-        borderWidth:1
+    boton:{
+        paddingHorizontal: 5,
+        paddingVertical: 6,
+        textAlign: 'center',
+        backgroundColor: '#28a745',
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin:2
     }
 })
 

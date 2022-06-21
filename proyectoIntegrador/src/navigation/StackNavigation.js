@@ -52,7 +52,7 @@ class StackNavigation extends Component{
             .catch(error => console.log(error))
         })
         .then(response => this.setState({loggedIn: true}))
-        .catch(error => this.setState({errorRegister: `Problems creating the user because ${error.message}`}))
+        .catch(error => this.setState({errorRegister:error.message}))
 
         .catch(erorr => {
             this.setState({errorRegister: error.message})

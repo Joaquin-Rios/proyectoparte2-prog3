@@ -36,9 +36,8 @@ class Home extends Component {
 
   render(){
     return (
-      <View style={styles.section2}>
-       <Text>Estos son los Posts recientes:</Text>
-
+      <View style={style.container}>
+       
         {
          this.state.loading ?
          <ActivityIndicator size={32} color='red'/>
@@ -48,36 +47,21 @@ class Home extends Component {
          keyExtractor={item => item.id.toString()}
          renderItem={({ item }) => <Posts info={item} navigation={this.props.navigation}/>}
          />
-         }
-
-
-
-      
+        }
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  btn:{
-    flex:1,
-    borderWidth:1,
-    borderRadius:5,
-    backgroundColor:'#192A51',
-    paddingVertical:16,
-    paddingHorizontal:8,
-    marginHorizontal:'auto',
-  },
-  textBtn:{
-    color:'white'
-  },
-  section2:{
+const style = StyleSheet.create({
+  container:{
     backgroundColor: 'white',
     flex: 2,
-    borderWidth: 1,
-    borderRadius: 4,
+    padding:3,
+    //borderWidth: 1,
+    //borderRadius: 4,
     textAlign: 'center'
-},
+  },
 })
 
 export default Home
