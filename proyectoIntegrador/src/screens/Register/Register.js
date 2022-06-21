@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
 import { auth, db } from "../../firebase/config";
-import { AntDesign } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
 
 class Register extends Component {
     constructor(props){
@@ -49,8 +49,8 @@ class Register extends Component {
 
                 }
                 
-                <View style={this.props.errorRegister ? style.errorContainerShow : style.errorContainerHide}>
-                    <AntDesign name="exclamationcircle" size={24} color="white" />
+                <View style={this.props.errorRegister ? style.mostrarError : style.ocultarError}>
+                    <MaterialIcons name="dangerous" size={24} color="black" />
                     <Text style={style.errorText}>{this.props.errorRegister}</Text>
                 </View>
                 
@@ -91,14 +91,13 @@ const style = StyleSheet.create({
     },
     texto:{
         textAlign: 'left',
-        padding: 5,
         fontFamily: 'Arial'
 
     },
     bloquearBoton:{
         opacity: 0.5,
         backgroundColor: '#28a745',
-        padding: 13,
+        padding: 10,
         textAlign: 'center',
         borderRadius: 4,
         borderWidth: 1,
@@ -106,7 +105,7 @@ const style = StyleSheet.create({
         borderColor: '#28a745s',
         marginVertical: 10,
     },
-    errorContainerHide:{
+    ocultarError:{
         display: 'flex',
         flexDirection: 'row',
         backgroundColor: '#EF476F',
@@ -115,19 +114,20 @@ const style = StyleSheet.create({
         gap: 5,
         opacity: 0
     },
-    errorContainerShow:{
+    mostrarError:{
         display: 'flex',
         flexDirection: 'row',
-        backgroundColor: '#EF476F',
+        backgroundColor: '#ffdfd4',
         borderRadius: 4,
         padding: 10,
-        gap: 5,
+        //gap:5
     },
     errorText: {
-        color: 'white',
+        color: 'black',
         display: 'flex',
         alignItems: 'center',
         fontSize: 15,
+        margin: 2
     }
 });
 

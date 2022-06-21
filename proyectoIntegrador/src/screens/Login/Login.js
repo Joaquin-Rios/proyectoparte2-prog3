@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
 import { auth } from "../../firebase/config";
-import { AntDesign } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
 
 class Login extends Component {
     constructor(){
@@ -42,8 +42,8 @@ class Login extends Component {
                 
                 }
 
-                <View style={this.props.errorLogin ? style.errorContainerShow : style.errorContainerHide}>
-                    <AntDesign name="exclamationcircle" size={24} color="white" />
+                <View style={this.props.errorLogin ? style.mostrarError : style.ocultarError}>
+                    <MaterialIcons name="dangerous" size={24} color="black" />
                     <Text style={style.errorText}>{this.props.errorLogin}</Text>
                 </View>
 
@@ -98,7 +98,7 @@ const style = StyleSheet.create({
         borderColor: '#28a745s',
         marginVertical: 10,
     },
-    errorContainerHide:{
+    ocultarError:{
         display: 'flex',
         flexDirection: 'row',
         backgroundColor: '#EF476F',
@@ -107,19 +107,20 @@ const style = StyleSheet.create({
         gap: 5,
         opacity: 0
     },
-    errorContainerShow:{
+    mostrarError:{
         display: 'flex',
         flexDirection: 'row',
-        backgroundColor: '#EF476F',
+        backgroundColor: '#ffdfd4',
         borderRadius: 4,
         padding: 10,
-        gap: 5,
+        //gap:5
     },
     errorText: {
-        color: 'white',
+        color: 'black',
         display: 'flex',
         alignItems: 'center',
         fontSize: 15,
+        margin: 2
     }
 });
 
