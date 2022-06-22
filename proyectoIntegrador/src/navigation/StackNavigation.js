@@ -10,8 +10,6 @@ import TabNavigation from './TabNavigation';
 import Profile from '../screens/Profile/Profile';
 import Comments from '../screens/Comments/Comments';
 
-
-
 const Stack = createNativeStackNavigator()
 
 class StackNavigation extends Component{
@@ -86,7 +84,7 @@ class StackNavigation extends Component{
                             initialParams={
                                 {
                                     logout: () => this.logout(),
-                                    errorMessage: this.errorMessage
+                                   // errorMessage: this.errorMessage
                                 }
                             }
                             />

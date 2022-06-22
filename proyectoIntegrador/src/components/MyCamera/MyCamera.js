@@ -37,14 +37,11 @@ class MyCamera extends Component {
 
     guardarFoto(){
         fetch(this.state.urlFoto)
-        .then(response => {
-            // console.log(response)    
+        .then(response => {   
             return response.blob()
         })
         .then(foto => {
-            // console.log(foto)
             const referenciaDelStorage = storage.ref(`photos/${Date.now()}.jpg`)
-            // console.log(referenciaDelStorage)
 
             referenciaDelStorage.put(foto)
             .then(()=>{
@@ -52,7 +49,6 @@ class MyCamera extends Component {
                 .then( url => {
                     console.log(url)
                     this.props.cuandoSubaLaImagen(url);
-                    //this.setState({url:''})
                 })
             })
         })

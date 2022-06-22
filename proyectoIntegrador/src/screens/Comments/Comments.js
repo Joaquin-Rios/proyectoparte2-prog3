@@ -50,8 +50,8 @@ class Comments extends Component {
                     <FlatList
                         data={this.state.comentarios}
                         keyExtractor={( item ) => item.createdAt.toString()}
-                        renderItem={ ( {item} ) => <View style={styles.comment}>
-                        <Text>{item.owner}</Text>
+                        renderItem={ ( {item} ) => <View style={styles.containerComment}>
+                        <Text style={styles.nombre}>{item.owner}</Text>
                         <Text>{item.description}</Text>
                         </View>}
                     />
@@ -68,11 +68,11 @@ class Comments extends Component {
                 }
                 value={this.state.nuevoComentario}
                 keyboardType='default'
-                style={styles.inputComment}
+                style={styles.container}
                 />
                 <TouchableOpacity 
                 onPress={()=> this.comentar(this.state.nuevoComentario)}
-                style={styles.btnComment}
+                style={styles.boton}
                 >
                     <Text>Enviar</Text>
                 </TouchableOpacity>
@@ -84,28 +84,29 @@ class Comments extends Component {
 
 const styles = StyleSheet.create({
     container:{
-      width:'100%',
-      height:'100%',
-      justifyContent:'center',
-      alignItems:'center'
+        backgroundColor: 'white',
+        flex: 2,
+        padding:3,
+        //borderWidth: 1,
+        //borderRadius: 4,
+        textAlign: 'center'
     },
     comment:{
         marginTop:30
     },
-    containerComment:{
-      flexDirection:'row',
-      width:'90%'
+    boton:{
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        backgroundColor: '#28a745',
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#28a745'
     },
-    inputComment:{
-      borderWidth:1,
-      backgroundColor:'#c3c3c3',
-      width:'80%'
-    },
-    btnComment:{
-      width:'20%',
-      padding:10,
-      backgroundColor:'#d3d3d3'
-  
+    nombre:{
+        fontWeight: 600,
+        
     }
   })
 
