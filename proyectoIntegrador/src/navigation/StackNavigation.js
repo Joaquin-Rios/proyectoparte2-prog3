@@ -52,9 +52,6 @@ class StackNavigation extends Component{
         .then(response => this.setState({loggedIn: true}))
         .catch(error => this.setState({errorRegister:error.message}))
 
-        .catch(erorr => {
-            this.setState({errorRegister: error.message})
-        })
     }
 
 
@@ -84,7 +81,6 @@ class StackNavigation extends Component{
                             initialParams={
                                 {
                                     logout: () => this.logout(),
-                                   // errorMessage: this.errorMessage
                                 }
                             }
                             />

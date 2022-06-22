@@ -95,8 +95,6 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     flex: 2,
     padding:3,
-    //borderWidth: 1,
-    //borderRadius: 4,
     textAlign: 'center'
   },
   boton:{

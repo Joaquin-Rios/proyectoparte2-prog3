@@ -153,13 +153,10 @@ const style= StyleSheet.create({
         flex:1,
         flexDirection:'row',
         justifyContent:'space-between',
-        //paddingVertical:5,
         paddingHorizontal:5,
         borderRadius:5,
         borderWidth: 1,
         backgroundColor:'#D3D3D3',
-        //marginHorizontal:10,
-        //marginTop:8
     },
     containerBoton:{
         justifyContent: 'space-between',
@@ -171,7 +168,6 @@ const style= StyleSheet.create({
         fontWeight:600
     },
     Post:{
-        //paddingLeft:8,
         paddingVertical:5,
         fontWeight: 600,
     },

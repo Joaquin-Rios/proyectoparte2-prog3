@@ -113,7 +113,6 @@ const style = StyleSheet.create({
         backgroundColor: '#ffdfd4',
         borderRadius: 4,
         padding: 10,
-        //gap:5
     },
     errorText: {
         color: 'black',
